@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float velocity = 0.5f;
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] SfxManager sfxManager;
 
     private Rigidbody2D rb;
     private Vector3 startPosition;
@@ -27,7 +28,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        MyGameManager.instance.GameOver();
+        
+        if(collision.gameObject)
+        {
+            sfxManager.PlaySFC(sfxManager.death); //Звуковой эффект
+            MyGameManager.instance.GameOver();
+        }
     }
 
     public void MoveUp()

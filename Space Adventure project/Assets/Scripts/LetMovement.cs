@@ -58,13 +58,16 @@ public class LetMovement: MonoBehaviour
     }
     void Update()
     {
-          
+        meteoritsQuantiy = transform.childCount;
         transform.position += Vector3.left * speed * Time.deltaTime;
 
         for(int i = 0; i < meteoritsQuantiy; i++)
         {
             //meteorits[i].transform.Rotate(0, 0, rotationSpeed * Time.timeScale);
-            meteorits[i].transform.rotation *= Quaternion.Euler(0, 0, rotationSpeed * Time.timeScale * Time.deltaTime);
+            if(meteorits[i] != null)
+            {
+                meteorits[i].transform.rotation *= Quaternion.Euler(0, 0, rotationSpeed * Time.timeScale * Time.deltaTime);
+            }
         }
         
     }

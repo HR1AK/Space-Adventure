@@ -13,10 +13,9 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private Image imageToggle;
     [SerializeField] private Sprite musicOn;
     [SerializeField] private Sprite musicOff;
-    [SerializeField] private GameObject volumeUI;
     [SerializeField] private Slider slider;
     
-    void Awake()
+    public virtual void Awake()
     {
         objs = GameObject.FindGameObjectsWithTag("Sound");
 
@@ -24,19 +23,35 @@ public class MusicManager : MonoBehaviour
         {   
             BGMusic = Instantiate(BGMusic);
             BGMusic.name = "BGMusic";
-            DontDestroyOnLoad(BGMusic.gameObject);
         }
         else
         {
-              BGMusic = GameObject.Find("BGMusic");
+            BGMusic = GameObject.Find("BGMusic");
         }
-
-        DontDestroyOnLoad(volumeUI);
+        
+        //DontDestroyOnLoad(volumeUI);
     }
 
     void Start()
     {
         audioSrc = BGMusic.GetComponent<AudioSource>();
+        if(PlayerPrefs.GetFloat("CustomOptions") == 1)
+        {
+            if(PlayerPrefs.GetFloat("MusicToggle") == 1)
+            {
+                imageToggle.sprite = musicOn;
+                musicOnOff = true;
+                audioSrc.volume = PlayerPrefs.GetFloat("MenuMusic");
+                slider.value = PlayerPrefs.GetFloat("MenuMusic");
+            }
+            else
+            {
+                imageToggle.sprite = musicOff;
+                musicOnOff = false;
+                audioSrc.volume = 0;
+                slider.value = PlayerPrefs.GetFloat("MenuMusic");
+            }
+        }
     }
 
     public void MusicSlider()
@@ -45,6 +60,9 @@ public class MusicManager : MonoBehaviour
         {
             audioSrc.volume = slider.value;
         }
+
+        PlayerPrefs.SetFloat("CustomOptions", 1);
+        PlayerPrefs.SetFloat("MenuMusic", slider.value);
     }
 
     public void ToggleTheMusic()
@@ -54,13 +72,15 @@ public class MusicManager : MonoBehaviour
             imageToggle.sprite = musicOff;
             audioSrc.volume = 0;
             musicOnOff = false;
+            PlayerPrefs.SetFloat("MusicToggle", 0);
         }
         else
         {
             imageToggle.sprite = musicOn;
             audioSrc.volume = slider.value;
             musicOnOff = true;
+            PlayerPrefs.SetFloat("MusicToggle", 1);
         }
-        
+        PlayerPrefs.SetFloat("CustomOptions", 1);
     }
 }

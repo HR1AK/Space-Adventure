@@ -33,8 +33,8 @@ public class LetSpawn : MonoBehaviour
     void Spawner()
     {
         Vector3 spawnPosition = transform.position + new Vector3(0, Random.Range(minHeightRange, maxHeightRange));
-        GameObject let = Instantiate(asteroidsPrefs, spawnPosition, Quaternion.identity);
+        GameObject meteorits = Instantiate(asteroidsPrefs, spawnPosition, Quaternion.identity);
 
-        Destroy(let, timeDestroy);
+        Destroy(meteorits, timeDestroy);
     }
 }

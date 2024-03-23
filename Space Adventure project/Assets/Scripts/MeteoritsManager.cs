@@ -6,7 +6,9 @@ using UnityEngine.UIElements;
 public class MeteoritsManager : MonoBehaviour
 {
 
+    private int health = 100;
     [SerializeField] private Sprite[] meteoriteSprites = new Sprite[3];
+    [SerializeField] SfxManager sfxManager;
     //private float meteoriteScale = 0f;
     //private float rotationSpeed = 0f;
 
@@ -14,10 +16,22 @@ public class MeteoritsManager : MonoBehaviour
     {
         //rotationSpeed = Random.Range(0.3f, 0.6f);
         GetComponent<SpriteRenderer>().sprite = meteoriteSprites[Random.Range(0,3)]; 
+        sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
     }
     
-    void Update()
+    public void TakeDamage(int damage)
     {
-        //transform.Rotate(0, 0, rotationSpeed * Time.timeScale);
+        health -=damage;
+
+        if(health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        sfxManager.PlaySFC(sfxManager.explosion);
+        Destroy(gameObject);
     }
 }
