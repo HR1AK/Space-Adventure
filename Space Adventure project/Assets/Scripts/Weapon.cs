@@ -14,20 +14,25 @@ public class Weapon : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentBulletsText;
     [SerializeField] private TextMeshProUGUI maxBulletsText;
 
-    [SerializeField] SfxManager sfxManager;
+    SfxManager sfxManager;
+
+    public AudioClip shotAudio;
+    public AudioClip takeAmmoAudio;
     // Update is called once per frame
     void Start()
 
     {
         currentBulletsText.text = bulletCount.ToString();
         maxBulletsText.text = maxBullets.ToString();
+        if(sfxManager == null) 
+            sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
     }
 
     public void Shoot()
     {
         if(bulletCount > 0)
         {
-            sfxManager.PlaySFC(sfxManager.shot);
+            sfxManager.PlaySFC(shotAudio);
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             bulletCount--;
         }
@@ -39,7 +44,7 @@ public class Weapon : MonoBehaviour
     public void AddAmmo(int ammo)
     {
         bulletCount = math.min(bulletCount + ammo,10);
-        sfxManager.PlaySFC(sfxManager.takeAmmo);
+        sfxManager.PlaySFC(takeAmmoAudio);
         currentBulletsText.text = bulletCount.ToString();
         maxBulletsText.text = maxBullets.ToString();
     }

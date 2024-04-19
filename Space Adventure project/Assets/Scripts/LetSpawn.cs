@@ -10,8 +10,6 @@ public class LetSpawn : MonoBehaviour
     [SerializeField] private float minHeightRange = -0.1f;
     [SerializeField] private GameObject asteroidsPrefs;
 
-
-
     private float timer;
 
     void Start()

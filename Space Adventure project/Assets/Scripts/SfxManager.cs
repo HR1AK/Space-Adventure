@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SfxManager : MonoBehaviour
+public class SfxManager: MonoBehaviour
 {
-    public AudioClip shot;
-    public AudioClip death;
-    public AudioClip explosion;
-    public AudioClip takeAmmo;
-
     private AudioSource audioSource;
     [SerializeField] private Image imageToggle;
     [SerializeField] private Sprite musicOn;
@@ -20,7 +15,7 @@ public class SfxManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        if(PlayerPrefs.GetFloat("CustomEffectOptions") == 1)
+        if(PlayerPrefs.GetFloat("IsCustomEffects") == 1)
         {
             slider.value = PlayerPrefs.GetFloat("EffectValue");
 
@@ -41,10 +36,19 @@ public class SfxManager : MonoBehaviour
     {
         if(EffectToggle)
         {
-            audioSource.volume = slider.value;
-            PlayerPrefs.SetFloat("EffectValue", slider.value);
             audioSource.PlayOneShot(clip);
         }
+    }
+
+    public void SfxSlider()
+    {
+        if(EffectToggle)
+        {
+            audioSource.volume = slider.value;
+        }
+
+        PlayerPrefs.SetFloat("IsCustomEffects", 1);
+        PlayerPrefs.SetFloat("EffectValue", slider.value);
     }
 
     public void ToggleEffects()
@@ -58,10 +62,10 @@ public class SfxManager : MonoBehaviour
         else
         {
             imageToggle.sprite = musicOn;
-            //audioSource.volume = slider.value;
+            audioSource.volume = slider.value;
             PlayerPrefs.SetFloat("EffectToggle", 1);
         }
         EffectToggle = !EffectToggle;
-        PlayerPrefs.SetFloat("CustomEffectOptions", 1);
+        PlayerPrefs.SetFloat("IsCustomEffects", 1);
     }
 }

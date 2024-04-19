@@ -67,20 +67,19 @@ public class MusicManager : MonoBehaviour
 
     public void ToggleTheMusic()
     {
-        if(audioSrc.volume != 0)
+        if(musicOnOff)
         {
             imageToggle.sprite = musicOff;
             audioSrc.volume = 0;
-            musicOnOff = false;
             PlayerPrefs.SetFloat("MusicToggle", 0);
         }
         else
         {
             imageToggle.sprite = musicOn;
             audioSrc.volume = slider.value;
-            musicOnOff = true;
             PlayerPrefs.SetFloat("MusicToggle", 1);
         }
+        musicOnOff = !musicOnOff;
         PlayerPrefs.SetFloat("CustomOptions", 1);
     }
 }

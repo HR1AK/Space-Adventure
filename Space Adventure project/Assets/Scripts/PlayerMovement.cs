@@ -8,9 +8,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float velocity = 0.5f;
-    [SerializeField] private float rotationSpeed = 10f;
-    [SerializeField] SfxManager sfxManager;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float rotationAngle = 20f;
+    SfxManager sfxManager;
+    public AudioClip deathAudio;
 
     private Rigidbody2D rb;
     private Vector3 startPosition;
@@ -19,11 +20,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
+
+        if(sfxManager == null) 
+            sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
     }
 
     void FixedUpdate()
     {
-        transform.rotation = Quaternion.Euler(0, 0, rb.velocity.y * rotationSpeed);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -31,18 +35,34 @@ public class PlayerMovement : MonoBehaviour
         
         if(collision.gameObject)
         {
-            sfxManager.PlaySFC(sfxManager.death); //Звуковой эффект
+            sfxManager.PlaySFC(deathAudio);
             MyGameManager.instance.GameOver();
         }
     }
 
     public void MoveUp()
     {
-        rb.velocity = Vector2.up * velocity;
+        rb.velocity = Vector2.up * speed;
+        
     }
 
     public void MoveDown()
     {
-        rb.velocity = Vector2.down * velocity;
+        rb.velocity = Vector2.down * speed;
+    }
+
+    public void StopMoving()
+    {
+        rb.velocity = Vector2.zero;
+    }
+
+    public void AddAngle()
+    {
+        transform.RotateAround(transform.position, Vector3.forward, rotationAngle);
+    }
+
+    public void SubstractAngle()
+    {
+        transform.RotateAround(transform.position, Vector3.forward, -rotationAngle);
     }
 }

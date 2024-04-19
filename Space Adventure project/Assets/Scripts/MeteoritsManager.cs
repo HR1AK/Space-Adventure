@@ -8,15 +8,16 @@ public class MeteoritsManager : MonoBehaviour
 
     private int health = 100;
     [SerializeField] private Sprite[] meteoriteSprites = new Sprite[3];
-    [SerializeField] SfxManager sfxManager;
+    SfxManager sfxManager;
     //private float meteoriteScale = 0f;
     //private float rotationSpeed = 0f;
+    public AudioClip explosionAudio;
 
     void Start()
     {
         //rotationSpeed = Random.Range(0.3f, 0.6f);
         GetComponent<SpriteRenderer>().sprite = meteoriteSprites[Random.Range(0,3)]; 
-        sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
+        //sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
     }
     
     public void TakeDamage(int damage)
@@ -31,7 +32,9 @@ public class MeteoritsManager : MonoBehaviour
 
     private void Die()
     {
-        sfxManager.PlaySFC(sfxManager.explosion);
+        if(sfxManager == null) 
+            sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
+        sfxManager.PlaySFC(explosionAudio);
         Destroy(gameObject);
     }
 }

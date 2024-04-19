@@ -102,6 +102,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3ea5fd20041a18b428807cca1a2006c5, type: 3}
   - {fileID: 21300000, guid: 7f2e320035d1fdc4789f9eff30a3f8b1, type: 3}
   - {fileID: 21300000, guid: a1f26c6f7b63bdf4cbb3db0d2090c288, type: 3}
+  sfxManager: {fileID: 7356281278822764318, guid: 682b2b06a71c63649a35e413d19e3d55, type: 3}
+  explosionAudio: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
 --- !u!58 &6872980141280014471
 CircleCollider2D:
   m_ObjectHideFlags: 0

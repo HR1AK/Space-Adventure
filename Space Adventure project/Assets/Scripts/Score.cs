@@ -9,12 +9,10 @@ public class Score : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentScore;
     [SerializeField] private TextMeshProUGUI hightScore;
     private int score;
+    private int record;
 
     private void Start()
     {
-        currentScore.text = score.ToString();
-        hightScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
-        UpdateHighScore();
         StartCoroutine(ITimer());
     }
 
@@ -30,6 +28,10 @@ public class Score : MonoBehaviour
 
     private void Awake()
     {
+        record = PlayerPrefs.GetInt("HighScore", 0);
+        hightScore.text = record.ToString();
+        score = 0;
+
         if(instatiate == null)
         {
             instatiate = this;
@@ -38,17 +40,18 @@ public class Score : MonoBehaviour
 
     private void UpdateHighScore()
     {
-        if(score > PlayerPrefs.GetInt("HighScore"))
-        {
-            PlayerPrefs.SetInt("HighScore",score);
-            hightScore.text = score.ToString();
-        }
+        PlayerPrefs.SetInt("HighScore",score);
+        hightScore.text = score.ToString();
     }
 
     public void UpdateScore()
-    {
+    {   
         score++;
         currentScore.text = score.ToString();
-        UpdateHighScore();
+
+        if(score > record)
+        {
+            UpdateHighScore();
+        }
     }
 }
