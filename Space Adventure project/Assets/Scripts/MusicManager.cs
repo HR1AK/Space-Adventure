@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MusicManager : MonoBehaviour
+public abstract class MusicManager : MonoBehaviour
 {
     public GameObject BGMusic;
     private AudioSource audioSrc;

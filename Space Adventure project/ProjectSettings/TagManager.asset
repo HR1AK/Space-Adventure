@@ -6,11 +6,13 @@ TagManager:
   tags:
   - Sound
   - SFXManagerTag
+  - MaxBullets
+  - CurrentBullets
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MaxBullets
   - Water
   - UI
   - 

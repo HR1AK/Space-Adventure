@@ -18,11 +18,6 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        MeteoritsManager Meteorit = hitInfo.GetComponent<MeteoritsManager>();
-        if(Meteorit != null)
-        {
-            Meteorit.TakeDamage(damage);
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
     public Transform firePoint;
     [SerializeField] private int bulletCount = 10;
-    [SerializeField] private int maxBullets = 10;
+    [SerializeField] private int maxBullets = 100;
     [SerializeField] public Transform bulletPrefab;
 
-    [SerializeField] private TextMeshProUGUI currentBulletsText;
-    [SerializeField] private TextMeshProUGUI maxBulletsText;
+    private TextMeshProUGUI currentBulletsText;
+    private TextMeshProUGUI maxBulletsText;
 
     SfxManager sfxManager;
 
     public AudioClip shotAudio;
     public AudioClip takeAmmoAudio;
     // Update is called once per frame
-    void Start()
-
-    {
+    void Awake()
+    {   
+        maxBulletsText = GameObject.FindGameObjectWithTag("MaxBullets").GetComponent<TextMeshProUGUI>();
+        currentBulletsText = GameObject.FindGameObjectWithTag("CurrentBullets").GetComponent<TextMeshProUGUI>();
+        
         currentBulletsText.text = bulletCount.ToString();
         maxBulletsText.text = maxBullets.ToString();
+
         if(sfxManager == null) 
             sfxManager = GameObject.FindGameObjectWithTag("SFXManagerTag").GetComponent<SfxManager>();
     }

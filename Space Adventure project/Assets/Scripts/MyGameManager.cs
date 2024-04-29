@@ -5,14 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MyGameManager : MonoBehaviour
 {
+    //GameObjects
     public static MyGameManager instance;
 
+
+    //Canvases
     [SerializeField] private GameObject volumeUI;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject StopScreen;
     [SerializeField] private GameObject ContinueScreen;
     [SerializeField] private GameObject ShootScreen;
     [SerializeField] private GameObject PlayerControllScreen;
+    [SerializeField] private GameObject IceDebuffCanvas;
+
     
     private void Awake()
     {
@@ -22,6 +27,13 @@ public class MyGameManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
+        InstantiateGameObjects();
+        
+    }
+
+    public void InstantiateGameObjects()
+    {
+        //Instantiate(player);
     }
 
     public void GameOver()
@@ -58,5 +70,21 @@ public class MyGameManager : MonoBehaviour
         volumeUI.SetActive(false);
         PlayerControllScreen.SetActive(true);
         Time.timeScale = 1f;
+    }
+
+    public void ShowDebuffCanvas()
+    {
+        IceDebuffCanvas.SetActive(true);
+    }
+
+    public void HideDebuffCanvas()
+    {
+        if(IceDebuffCanvas)
+            IceDebuffCanvas.SetActive(false);
+    }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
