@@ -18,6 +18,10 @@ public class MyGameManager : MonoBehaviour
     [SerializeField] private GameObject PlayerControllScreen;
     [SerializeField] private GameObject IceDebuffCanvas;
 
+
+    //StartScene
+
+
     
     private void Awake()
     {
@@ -27,16 +31,9 @@ public class MyGameManager : MonoBehaviour
         }
 
         Time.timeScale = 1f;
-        InstantiateGameObjects();
-        
     }
 
-    public void InstantiateGameObjects()
-    {
-        //Instantiate(player);
-    }
-
-    public void GameOver()
+    public IEnumerator IGameOver()
     {
         gameOverScreen.SetActive(true);
         ContinueScreen.SetActive(false);
@@ -44,7 +41,11 @@ public class MyGameManager : MonoBehaviour
         ShootScreen.SetActive(false);
         volumeUI.SetActive(true);
         PlayerControllScreen.SetActive(false);
+
+        Debug.Log("Я ВЫПОЛНИЛСЯ!");
+        Debug.Log("И Я ВЫПОЛНИЛСЯ!");
         Time.timeScale = 0f;
+        yield return new WaitForSeconds(0);
     }
 
     public void RestartGame()

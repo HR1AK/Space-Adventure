@@ -15,7 +15,6 @@ public class Icons : MonoBehaviour
         {
             button.GetComponent<Image>().sprite = sprites[0];
             SetLanguageOnPref();
-            //Debug.Log(PlayerPrefs.GetString("Language"));
         }
         else
             button.GetComponent<Image>().sprite = sprites[1];
@@ -23,6 +22,6 @@ public class Icons : MonoBehaviour
 
     public virtual void SetLanguageOnPref()
     {
-
+        //
     }
 }

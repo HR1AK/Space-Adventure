@@ -7,6 +7,11 @@ public class DefaultMeteorit : Meteorit
 {
     [SerializeField] private Sprite[] meteoriteSprites = new Sprite[3];
 
+    DefaultMeteorit()
+    {
+        health = 100;
+        damage = 100;
+    }
     public override void GetSprite()
     {
          GetComponent<SpriteRenderer>().sprite = meteoriteSprites[Random.Range(0,3)]; 
@@ -14,7 +19,7 @@ public class DefaultMeteorit : Meteorit
 
     public override void hitWithPlayer(PlayerMovement player)
     {
-        player.GameOver();   
+        player.TakeDamage(damage);   
     }
 
 }

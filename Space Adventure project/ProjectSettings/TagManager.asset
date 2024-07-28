@@ -8,6 +8,8 @@ TagManager:
   - SFXManagerTag
   - MaxBullets
   - CurrentBullets
+  - BG
+  - CaveBG
   layers:
   - Default
   - TransparentFX
@@ -15,11 +17,11 @@ TagManager:
   - MaxBullets
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Cave
+  - BlackHole
+  - Border
+  - Player
+  - Bullet
   - 
   - 
   - 

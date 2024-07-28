@@ -22,6 +22,7 @@ public class ChooseLanguage : MonoBehaviour
         lang = PlayerPrefs.GetString("Language");
         OpenJsonFile(lang);
         SetLanguageOnTextMesh();
+        Destroy(gameObject);
     }
 
     void OpenJsonFile(string lang)

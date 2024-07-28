@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip deathAudio;
     private Rigidbody2D rb;
     private Vector3 startPosition;
+    private float health;
+    protected float currentHealth;
 
     public Dictionary<int, string> debuffStates = new Dictionary<int, string>
     {
@@ -37,12 +39,23 @@ public class PlayerMovement : MonoBehaviour
 
     //DebuffCanvases
     [SerializeField] TextMeshProUGUI textDebuffTime;
+    [SerializeField] protected GameObject explosionAnimation;
+    FloatingHealthBar healthBar;
 
     public int debuffTimeLeft;
+
+    PlayerMovement()
+    {
+        health = 100;
+        currentHealth = health;
+    }
 
 
     void Start()
     {
+        healthBar = GetComponentInChildren<FloatingHealthBar>();
+        healthBar.UpdateHealthBar(currentHealth, health);
+
         debuffState = debuffStates[0];
         rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
@@ -55,7 +68,9 @@ public class PlayerMovement : MonoBehaviour
     public void GameOver()
     {
         sfxManager.PlaySFC(deathAudio);
-        MyGameManager.instance.GameOver();
+        Instantiate(explosionAnimation, transform.position, Quaternion.identity);
+        StartCoroutine(MyGameManager.instance.IGameOver());
+        Destroy(gameObject);
     }
 
     public void MoveUp()
@@ -116,6 +131,18 @@ public class PlayerMovement : MonoBehaviour
             textDebuffTime.text = debuffTimeLeft.ToString();
             debuffTimeLeft--;
             yield return new WaitForSeconds(1);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.UpdateHealthBar(currentHealth, health);
+        healthBar.gameObject.SetActive(true);
+
+        if(currentHealth <= 0)
+        {
+            GameOver();
         }
     }
 }

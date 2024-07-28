@@ -6,6 +6,12 @@ public class RedMeteorit : Meteorit
 {
     [SerializeField] private LittleMeteoritFactory littleMeteoritFactory;
 
+    RedMeteorit()
+    {
+        health = 250;
+        damage = 100;
+    }
+
     public override void Die()
     {
         Vector3 newPposition = transform.position;

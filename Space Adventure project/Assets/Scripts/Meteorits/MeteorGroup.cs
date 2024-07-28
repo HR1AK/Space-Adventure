@@ -11,16 +11,12 @@ public class MeteorGroup: MonoBehaviour
     private int j; //разброс от начальной позиции для метеоритов, считается по выведенной формуле
     private float spread = 0f; //разброс от начальной позиции для метеоритов, считается по выведенной формуле
     float dispersion; //разброс позиции метеорита уже внутри собственной области
-
+    Meteorit meteorit = null;
+    private Vector3 meteorPos;
 
     [SerializeField] private DefaultMeteoritFactory defaultMeteoritFactory;
     [SerializeField] private IceMeteoritFactory IceMeteoritFactory;
     [SerializeField] private RedMeteoritFactory RedMeteoritFactory;
-
-
-    Meteorit meteorit = null;
-
-    private Vector3 meteorPos;
 
     void Start()
     {
@@ -41,10 +37,6 @@ public class MeteorGroup: MonoBehaviour
             j--;
         }
 
-    }
-    void Update()
-    {
-        //transform.position += Vector3.left * speed * Time.deltaTime;
     }
 
     int ChooseMeteoritQuantity()

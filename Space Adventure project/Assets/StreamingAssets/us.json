@@ -5,5 +5,15 @@
 	"exit": "Exit",
 	"musicVolume": "Music valume",
 	"effectVolume": "Effect valume",
-	"pause": "Pause"
+	"pause": "Pause",
+	"option": "Option",
+	"backToMenu": "Back to menu",
+	"information": "Information",
+	"defMet": "Default meteorite. In a collision, it destroys the ship.",
+	"iceMet": "Ice meteorite. Slows down the player upon collision.",
+	"redMet": "Red meteorite Titan.",
+	"smallMet": "Small ruby ​​meteorite. When colliding with a player, it destroys the ship.",
+	"starship": "A ship controlled by the player.",
+	"ammo": "Ammunition. Replenishes the number of cartridges.",
+	"blackHole": "Black hole. Attracts objects to itself."
 }

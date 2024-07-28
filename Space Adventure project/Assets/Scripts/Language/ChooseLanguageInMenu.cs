@@ -8,6 +8,20 @@ public class ChooseLanguageInMenu : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI restart;
     [SerializeField] private TextMeshProUGUI musicVolume;
+    [SerializeField] private TextMeshProUGUI exit;
+    [SerializeField] private TextMeshProUGUI option;
+    [SerializeField] private TextMeshProUGUI backToMenu;
+    [SerializeField] private TextMeshProUGUI information;
+
+    //Information
+    [SerializeField] private TextMeshProUGUI defMet;
+    [SerializeField] private TextMeshProUGUI iceMet;
+    [SerializeField] private TextMeshProUGUI redMet;
+    [SerializeField] private TextMeshProUGUI smallMet;
+    [SerializeField] private TextMeshProUGUI starship;
+    [SerializeField] private TextMeshProUGUI ammo;
+    [SerializeField] private TextMeshProUGUI blackHole;
+
 
     private TextItems textItems;
 
@@ -32,9 +46,6 @@ public class ChooseLanguageInMenu : MonoBehaviour
         {
             textItems = JsonUtility.FromJson<TextItems>(File.ReadAllText(path));
         }
-
-
-        //textItems = JsonUtility.FromJson<TextItems>(File.ReadAllText(path));
     }
 
     public void RefreshWithNewLAnguage()
@@ -49,6 +60,18 @@ public class ChooseLanguageInMenu : MonoBehaviour
     {
         restart.text = textItems.restart.ToString();
         musicVolume.text = textItems.musicVolume.ToString();
+        exit.text = textItems.exit.ToString();
+        option.text = textItems.option.ToString();
+        backToMenu.text = textItems.backToMenu.ToString();
+        information.text = textItems.information.ToString();
+
+        defMet.text = textItems.defMet.ToString();
+        iceMet.text = textItems.iceMet.ToString();
+        redMet.text = textItems.redMet.ToString();
+        smallMet.text = textItems.smallMet.ToString();
+        starship.text = textItems.starship.ToString();
+        ammo.text = textItems.ammo.ToString();
+        blackHole.text = textItems.blackHole.ToString();
     }
 
     void SetLanguage()
